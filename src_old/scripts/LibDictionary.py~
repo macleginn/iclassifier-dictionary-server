@@ -1,0 +1,9 @@
+from dataclasses import dataclass
+
+@dataclass
+class DictionaryEntry:
+    entry: str
+    short_meaning: str
+    meaning: str
+    examples: str
+    comments: str

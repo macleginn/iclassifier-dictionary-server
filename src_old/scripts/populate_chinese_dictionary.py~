@@ -1,0 +1,29 @@
+import sqlite3
+
+import LibDictionary as ld
+
+
+def process_line(line):
+    traditional, simplified, rest = line.split(' ', 2)
+    print(f"{traditional} | {simplified} | {rest}")
+    translit, meanings = rest.split('] ', 1)
+    translit = translit[1:]
+    meanings = meanings[1:-1]
+    first_meaning, *other_meanings_arr = meanings.split('/', 1)
+    if other_meanings_arr:
+        other_meanings = other_meanings_arr[0]
+    else:
+        other_meanings = ''
+    
+    entry = f"{traditional} ({simplified}, [{translit}])"
+    return
+
+
+with open('../../dictionaties_raw/cedict_1_0_ts_utf-8_mdbg.txt', 
+          'r',
+          encoding='utf-8') as inp:
+    for l in inp:
+        if l.startswith('#'):
+            continue
+        process_line(l)
+        break
